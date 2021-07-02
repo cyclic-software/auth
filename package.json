@@ -1,0 +1,28 @@
+{
+  "name": "auth",
+  "version": "0.0.1",
+  "description": "JWT auth provider",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyclic-software/auth.git"
+  },
+  "keywords": [
+    "jwt",
+    "auth",
+    "openid"
+  ],
+  "author": "Cyclic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyclic-software/auth/issues"
+  },
+  "homepage": "https://github.com/cyclic-software/auth#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  }
+}
