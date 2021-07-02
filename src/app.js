@@ -16,30 +16,15 @@ var options = {
 
 app.use(express.static('../public', options))
 
-app.get('/', (req,res) => {
-  res.json({
-    jwt: jwt.generate()
-  })
-})
+app.get('/create', async (req,res) => {
 
-app.use('*', (req,res) => {
-  console.log('[hello-world] Star handler called')
-  res
-    .set('x-powered-by', 'cyclic.sh')
-    .set('content-type', 'application/json')
+  var jwtStr = await jwt.create()
+
+  res.set('content-type', 'application/json')
     .send(JSON.stringify({
-      msg: "Thanks for playing!",
-      at: new Date().toISOString(),
-      method: req.method,
-      hostname: req.hostname,
-      ip: req.ip,
-      path: req.params[0],
-      query: req.query,
-      headers: req.headers,
-      // cookies: req.cookies,
-      env: process.env
-    },null,2))
-    .end()
+    jwt: jwtStr
+  },null,2))
+  .end()
 })
 
 module.exports = app

@@ -24,6 +24,7 @@
   "homepage": "https://github.com/cyclic-software/auth#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "jose": "^3.13.0",
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
