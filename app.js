@@ -5,6 +5,8 @@ const Provider = require('oidc-provider');
 assert(process.env.cyclic_app_env_SECURE_KEY, 'process.env.SECURE_KEY missing, make sure your env is configured correctly');
 assert(process.env.cyclic_app_env_SECURE_KEY.split(',').length === 2, 'process.env.SECURE_KEY format invalid');
 
+const jwks = require('./src/jwks.json');
+
 // new Provider instance with no extra configuration, will run in default, just needs the issuer
 // identifier, uses data from runtime-dyno-metadata heroku here
 const oidc = new Provider(`https://api.cyclic.sh`, { // Probably want to overwrite with dynamic URL?
@@ -20,6 +22,7 @@ const oidc = new Provider(`https://api.cyclic.sh`, { // Probably want to overwri
   cookies: {
     keys: process.env.cyclic_app_env_SECURE_KEY.split(','),
   },
+  jwks,
 });
 
 oidc.proxy = true;
