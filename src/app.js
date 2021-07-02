@@ -27,4 +27,24 @@ app.get('/create', async (req,res) => {
   .end()
 })
 
+// Target paths
+// /authorize
+// /oauth/device/code
+// /oauth/token
+// /userinfo
+// /.well-known/openid-configuration
+// /.well-known/jwks.json => sample: https://www.googleapis.com/oauth2/v3/certs
+
+app.get('/.well-known/jwks.json', async (req,res) => {
+  var jwkStr = await jwt.wellKnown()
+
+  res.set('content-type', 'application/json')
+    .send(JSON.stringify({
+    keys: [
+      jwkStr
+    ]
+  },null,2))
+  .end()
+})
+
 module.exports = app

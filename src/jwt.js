@@ -1,19 +1,9 @@
+require('dotenv').config()
+
 const fs = require('fs')
-// const jwt = require('jsonwebtoken')
-
-// function generate() {
-//   // sign with RSA SHA256
-//   var privateKeyPem = fs.readFileSync('keys/jwtRS256-20210702-060749.key');
-
-//   var token = jwt.sign({ user: 'bar' }, privateKeyPem, { algorithm: 'RS256' });
-
-//   console.log(token)
-//   return token
-// }
-
 const crypto = require('crypto')
-
 const { SignJWT } = require('jose/jwt/sign')
+const { fromKeyLike } = require('jose/jwk/from_key_like')
 
 async function create() {
 
@@ -33,4 +23,17 @@ async function create() {
 }
 
 module.exports.create = create
-// module.exports.generate = generate
+
+
+async function wellKnown() {
+
+  console.log(process.env.PUBLIC_KEY_FILENAME_1)
+  var publicKeyPem = fs.readFileSync('keys/jwtRS256-20210702-060749.key.pub');
+  const publicJwk = await fromKeyLike(publicKeyPem)
+
+  console.log(publicJwk)
+
+  return publicJwk
+}
+
+module.exports.wellKnown = wellKnown
